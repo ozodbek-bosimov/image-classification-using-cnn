@@ -2,45 +2,46 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ozodbek-bosimov/image-classification-using-cnn/blob/main/image_classification_cnn.ipynb)
 
-This project classifies images of cats and dogs using a Convolutional Neural Network (CNN) built with TensorFlow/Keras.
+This project classifies images of **cats and dogs** using a Convolutional Neural Network (CNN) built with TensorFlow/Keras.
 
 ## Project Structure
+
 ```
 image-classification-using-cnn/
 ├── Code/
-│   ├── constants.py              # Configuration constants
-│   ├── data_prep.py              # Data loading and preprocessing
-│   ├── model.py                  # CNN architecture
-│   └── main.py                   # Training pipeline (local)
-├── image_classification_cnn.ipynb  # 🔥 Google Colab notebook
-├── output/                       # Training results and predictions
-├── requirements.txt              # Python dependencies
-├── Report.pdf                    # Detailed project report
+│   ├── constants.py                # Configuration constants
+│   ├── data_prep.py                # Data loading and preprocessing
+│   ├── model.py                    # CNN architecture
+│   └── main.py                     # Training pipeline (local)
+├── image_classification_cnn.ipynb  # Google Colab notebook
+├── output/                         # Training results and predictions
+├── requirements.txt
 └── README.md
 ```
 
-## Quick Start (Google Colab) — Tavsiya qilinadi
+## Quick Start (Google Colab)
 
-1. Yuqoridagi **"Open in Colab"** badge'ni bosing
-2. `REPO_URL` ni o'z GitHub repo URL'ingizga o'zgartiring
-3. Runtime → Change runtime type → **GPU (T4)** tanlang
-4. Har bir cell'ni ketma-ket ishga tushiring
+1. Click the **"Open in Colab"** badge above
+2. Go to **Runtime → Change runtime type → GPU (T4)**
+3. Run each cell sequentially
+
+## Model Architecture
+
+```
+Conv2D(32, 3x3) → MaxPool → BatchNorm
+Conv2D(64, 3x3) → MaxPool → BatchNorm
+Conv2D(96, 3x3) → MaxPool → BatchNorm
+Conv2D(96, 3x3) → MaxPool → BatchNorm → Dropout(0.2)
+Conv2D(64, 3x3) → MaxPool → BatchNorm → Dropout(0.2)
+Flatten → Dense(256) → Dropout(0.2) → Dense(128) → Dropout(0.3) → Dense(2, softmax)
+
+Loss: categorical_crossentropy | Optimizer: Adam
+```
 
 ## Results
 
-- Training data: 18,000 images (cats + dogs)
-- Epochs: 15
-- Train/Validation split: 80/20
+Trained on **18,000 images** (cats + dogs) for **15 epochs** with 80/20 train/validation split.
 
-### Model Architecture
-```
-CONV 3x3 layers with batch norm: 32 → 64 → 96 → 96 → 64
-Dense layers with dropout: 256 → 128 → 2 (softmax)
-Loss: categorical_crossentropy
-Optimizer: Adam
-```
-
-### Performance
 | Metric | Score |
 |---|---|
 | Training Accuracy | 97.59% |
@@ -50,10 +51,10 @@ Optimizer: Adam
 
 ### Training Plots
 
-![Model accuracy with 5000 images](./output/accuracy_5000images_15epochs.png)
-![Model loss with 5000 images](./output/loss_5000images_15epochs.png)
-![Model accuracy with 18000 images](./output/accuracy_18000images_15epochs.png)
-![Model loss with 18000 images](./output/loss_18000images_15epochs.png)
+![Model accuracy (5K images)](./output/accuracy_5000images_15epochs.png)
+![Model loss (5K images)](./output/loss_5000images_15epochs.png)
+![Model accuracy (18K images)](./output/accuracy_18000images_15epochs.png)
+![Model loss (18K images)](./output/loss_18000images_15epochs.png)
 
 ### Prediction Samples
 
@@ -62,17 +63,21 @@ Optimizer: Adam
 ![Dog prediction](./output/dog_prediction1.PNG)
 ![Dog prediction](./output/dog_prediction2.PNG)
 
-## Local Setup (Alternative)
+## Local Setup
 
 ```bash
 git clone https://github.com/ozodbek-bosimov/image-classification-using-cnn.git
 cd image-classification-using-cnn
 pip install -r requirements.txt
-# Download the dataset and place train/ and test1/ folders in project root
+```
+
+Download the [Kaggle Dogs vs. Cats](https://www.kaggle.com/c/dogs-vs-cats/data) dataset and extract `train/` and `test1/` folders into the project root, then:
+
+```bash
 cd Code/
 python main.py
 ```
 
 ## Dataset
 
-[Kaggle Dogs vs. Cats](https://www.kaggle.com/c/dogs-vs-cats/data) — Download and extract `train/` and `test1/` folders into the project root directory.
+[Kaggle Dogs vs. Cats](https://www.kaggle.com/c/dogs-vs-cats/data) — 25,000 labeled images of cats and dogs.
