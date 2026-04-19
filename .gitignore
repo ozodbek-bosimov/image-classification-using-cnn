@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Dataset (too large for git — download separately)
+train/
+test1/
+
+# Trained model files (too large for git)
+Code/models/*.h5
+*.h5
+
+# Pickle files
+*.pickle
+
+# TensorBoard logs
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
